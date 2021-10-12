@@ -1,0 +1,27 @@
+.right .item {
+  margin-bottom: 1rem;
+}
+
+.right .item:last-child {
+  margin-bottom: 8rem;
+}
+
+.right .item-header {
+  display: grid;
+  grid-template-columns: 15px 1fr min-content;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border: 1px solid #000;
+}
+
+.right .item-footer {
+  padding: 1rem;
+  border: 1px solid #000;
+}
+
+.right .name {
+  justify-self: flex-start;
+  margin-left: 1rem;
+  text-align: left;
+}

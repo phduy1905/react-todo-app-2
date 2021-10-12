@@ -1,0 +1,36 @@
+.editing-form {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.editing-form input {
+  padding: 0.5rem;
+  width: 100%;
+}
+
+.editing-form label {
+  font-weight: bold;
+  margin-bottom: 0.75rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+}
+.editing-form .form-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.priority {
+  height: 100%;
+  padding: 0 0.5rem;
+}
+
+.desc {
+  height: 150px;
+  padding: 1rem;
+}

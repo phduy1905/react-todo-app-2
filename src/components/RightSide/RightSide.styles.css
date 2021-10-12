@@ -1,0 +1,30 @@
+.right {
+  min-width: 500px;
+  position: relative;
+}
+
+.right .search {
+  margin-bottom: 2rem;
+  width: 100%;
+  padding: 0.5rem;
+}
+
+.right .btn-container {
+  display: flex;
+  gap: 1rem;
+}
+
+.right .bulk-action {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+
+  border-top: 1px solid #000;
+  background-color: #ccc;
+  align-items: center;
+}

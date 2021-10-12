@@ -1,0 +1,15 @@
+.title {
+  margin-bottom: 2rem;
+}
+
+.left,
+.right {
+  padding: 1rem 2rem;
+  border: 1px solid #000;
+  text-align: center;
+}
+
+.todo-app {
+  display: grid;
+  grid-template-columns: 0.6fr 1fr;
+}
