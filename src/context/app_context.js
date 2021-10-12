@@ -48,6 +48,13 @@ export const AppProvider = ({ children }) => {
     dispatch({ type: "SEARCH_TODO", payload: string });
   };
 
+  const updateTodo = (id, title, desc, dueDate, priority) => {
+    dispatch({
+      type: "UPDATE_TODO",
+      payload: { id, title, desc, dueDate, priority },
+    });
+  };
+
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(state.todos));
   }, [state.todos]);
@@ -62,6 +69,7 @@ export const AppProvider = ({ children }) => {
         openBulk,
         closeBulk,
         searchTodo,
+        updateTodo,
       }}
     >
       {children}

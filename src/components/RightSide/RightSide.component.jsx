@@ -51,7 +51,7 @@ export const RightSide = () => {
           <span>Bulk Action: </span>
           <div className="btn-container">
             <Button color="blue">Done</Button>
-            <Button color="red" onClick={handleClearTodos}>
+            <Button color="red" onUpdate={handleClearTodos}>
               Remove
             </Button>
           </div>

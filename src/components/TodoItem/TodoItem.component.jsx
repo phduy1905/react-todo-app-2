@@ -4,7 +4,7 @@ import "./TodoItem.styles.css";
 import { useAppContext } from "../../context/app_context";
 
 export const TodoItem = ({ todo }) => {
-  const { removeTodo, openBulk, closeBulk } = useAppContext();
+  const { removeTodo, openBulk, closeBulk, updateTodo } = useAppContext();
 
   const [isEditing, setIsEditing] = useState(false);
 
@@ -24,6 +24,9 @@ export const TodoItem = ({ todo }) => {
     }
   };
 
+  const handleUpdate = (id, title, desc, dueDate, priority) => {
+    updateTodo(id, title, desc, dueDate, priority);
+  };
   const { title, id } = todo;
 
   return (
@@ -47,7 +50,7 @@ export const TodoItem = ({ todo }) => {
       </div>
       {isEditing && (
         <div className="item-footer">
-          <EditingForm btn="Update" data={todo} />
+          <EditingForm btn="Update" data={todo} onUpdate={handleUpdate} />
         </div>
       )}
     </div>

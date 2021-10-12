@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-export const EditingForm = ({ onAdd, btn, data }) => {
+export const EditingForm = ({ onAdd, onUpdate, btn, data }) => {
   const [state, setState] = useState({
     title: data?.title || "",
     desc: data?.desc || "",
@@ -46,6 +46,10 @@ export const EditingForm = ({ onAdd, btn, data }) => {
         priority: "normal",
         id: 1,
       });
+    }
+
+    if (onUpdate) {
+      onUpdate(id, title, desc, dueDate, priority);
     }
   };
 
