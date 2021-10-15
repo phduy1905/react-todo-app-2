@@ -10,9 +10,12 @@
   display: grid;
   grid-template-columns: 15px 1fr min-content;
   align-items: center;
-  margin-bottom: 1rem;
   padding: 1rem;
   border: 1px solid #000;
+}
+
+.right .item-header h3 {
+  max-width: 200px;
 }
 
 .right .item-footer {

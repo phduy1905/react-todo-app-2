@@ -4,8 +4,11 @@ import "./EditingForm.styles.css";
 import { v4 as uuidv4 } from "uuid";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useAppContext } from "../../context/app_context";
 
 export const EditingForm = ({ onAdd, onUpdate, btn, data }) => {
+  const { closeEditing } = useAppContext();
+
   const [state, setState] = useState({
     title: data?.title || "",
     desc: data?.desc || "",
@@ -31,25 +34,38 @@ export const EditingForm = ({ onAdd, onUpdate, btn, data }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    state.id = uuidv4();
-    state.dueDate = new Date(state.dueDate).getTime();
-    const { title, desc, dueDate, priority, id } = state;
+    let { title, desc, dueDate, priority, id } = state;
 
     if (onAdd) {
-      onAdd(title, desc, dueDate, priority, id);
+      const newTodo = {
+        title,
+        desc,
+        dueDate,
+        priority,
+        id: uuidv4(),
+      };
+      onAdd(newTodo);
 
       setState({
         title: "",
         desc: "",
         dueDate: new Date(),
         priority: "normal",
-        id: 1,
+        id: "",
       });
     }
 
     if (onUpdate) {
-      onUpdate(id, title, desc, dueDate, priority);
+      const newTodo = {
+        title,
+        desc,
+        dueDate: dueDate.getTime(),
+        priority,
+        id,
+      };
+
+      onUpdate(newTodo);
+      closeEditing();
     }
   };
 

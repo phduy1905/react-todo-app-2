@@ -4,7 +4,7 @@ import "./RightSide.styles.css";
 import { useAppContext } from "../../context/app_context";
 
 export const RightSide = () => {
-  let { todos, clearTodos, isBulkOpen, searchTodo, filtered_todos } =
+  let { todos, searchTodo, filtered_todos, checked_todos, clearCheckedTodos } =
     useAppContext();
 
   const [displayTodos, setDisplayTodos] = useState([]);
@@ -12,7 +12,7 @@ export const RightSide = () => {
   const searchEl = useRef(null);
 
   const handleClearTodos = () => {
-    clearTodos();
+    clearCheckedTodos();
   };
 
   const handleSearchChange = (e) => {
@@ -46,12 +46,12 @@ export const RightSide = () => {
         })}
       </div>
 
-      {isBulkOpen && todos.length >= 1 && (
+      {checked_todos.length >= 1 && (
         <div className="bulk-action">
           <span>Bulk Action: </span>
           <div className="btn-container">
             <Button color="blue">Done</Button>
-            <Button color="red" onUpdate={handleClearTodos}>
+            <Button color="red" onClick={handleClearTodos}>
               Remove
             </Button>
           </div>

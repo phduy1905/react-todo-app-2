@@ -1,16 +1,21 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Button, EditingForm } from "..";
 import "./TodoItem.styles.css";
 import { useAppContext } from "../../context/app_context";
 
 export const TodoItem = ({ todo }) => {
-  const { removeTodo, openBulk, closeBulk, updateTodo } = useAppContext();
+  const {
+    removeTodo,
+    openBulk,
+    closeBulk,
+    updateTodo,
+    toggleEditing,
+    isEditingOpen,
+    addToCheck,
+    removeFromCheck,
+  } = useAppContext();
 
-  const [isEditing, setIsEditing] = useState(false);
-
-  const toggleEditing = () => {
-    setIsEditing((prev) => !prev);
-  };
+  const checkbox = useRef(null);
 
   const handleRemove = () => {
     removeTodo(id);
@@ -18,15 +23,16 @@ export const TodoItem = ({ todo }) => {
 
   const handleBulkOpen = (e) => {
     if (e.target.checked) {
-      openBulk();
+      addToCheck(todo);
     } else {
-      closeBulk();
+      removeFromCheck(todo);
     }
   };
 
-  const handleUpdate = (id, title, desc, dueDate, priority) => {
-    updateTodo(id, title, desc, dueDate, priority);
+  const handleUpdate = (newTodo) => {
+    updateTodo(newTodo);
   };
+
   const { title, id } = todo;
 
   return (
@@ -37,6 +43,7 @@ export const TodoItem = ({ todo }) => {
           className="checkbox"
           defaultChecked={false}
           onChange={handleBulkOpen}
+          ref={checkbox}
         />
         <h3 className="name">{title}</h3>
         <div className="btn-container">
@@ -48,7 +55,7 @@ export const TodoItem = ({ todo }) => {
           </Button>
         </div>
       </div>
-      {isEditing && (
+      {isEditingOpen && (
         <div className="item-footer">
           <EditingForm btn="Update" data={todo} onUpdate={handleUpdate} />
         </div>

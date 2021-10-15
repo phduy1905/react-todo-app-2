@@ -14,6 +14,8 @@ const initialState = {
   todos: getLocalStorage(),
   filtered_todos: [],
   isBulkOpen: false,
+  isEditingOpen: false,
+  checked_todos: [],
 };
 
 const AppContext = createContext();
@@ -21,10 +23,10 @@ const AppContext = createContext();
 export const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const addTodo = (title, desc, dueDate, priority, id) => {
+  const addTodo = (newTodo) => {
     dispatch({
       type: "ADD_TODO",
-      payload: { title, desc, dueDate, priority, id },
+      payload: newTodo,
     });
   };
 
@@ -48,11 +50,31 @@ export const AppProvider = ({ children }) => {
     dispatch({ type: "SEARCH_TODO", payload: string });
   };
 
-  const updateTodo = (id, title, desc, dueDate, priority) => {
+  const updateTodo = (data) => {
     dispatch({
       type: "UPDATE_TODO",
-      payload: { id, title, desc, dueDate, priority },
+      payload: data,
     });
+  };
+
+  const toggleEditing = () => {
+    dispatch({ type: "TOGGLE_EDITING" });
+  };
+
+  const closeEditing = () => {
+    dispatch({ type: "CLOSE_EDITING" });
+  };
+
+  const addToCheck = (todo) => {
+    dispatch({ type: "ADD_TO_CHECK", payload: todo });
+  };
+
+  const removeFromCheck = (todo) => {
+    dispatch({ type: "REMOVE_FROM_CHECK", payload: todo });
+  };
+
+  const clearCheckedTodos = () => {
+    dispatch({ type: "CLEAR_CHECKED_TODOS" });
   };
 
   useEffect(() => {
@@ -70,6 +92,11 @@ export const AppProvider = ({ children }) => {
         closeBulk,
         searchTodo,
         updateTodo,
+        toggleEditing,
+        closeEditing,
+        addToCheck,
+        removeFromCheck,
+        clearCheckedTodos,
       }}
     >
       {children}
